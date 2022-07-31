@@ -7,11 +7,27 @@ from dotenv import load_dotenv
 import alpaca_trade_api as tradeapi
 
 class APIcalls:
-    def __init__(self, envpath: Path = None):
-        """
-        APIcalls constructor, load's environment and initializes key variables
-        envpath : specifies path of environment file 
-        """
+    """
+    A python class for fetching data using requests library & alpaca api 
+    
+    Constructor : initalizes & load environment
+                  params: envpath - optional parameter for environment file Path
+    ...
+    
+    Functions    
+    ----------
+    get_cryptos_price :fetches data e.g. prices, volume using request library
+                       params : urls - dictionary of { <symbol> : <url to make request call>}
+                       returns: dictionary of {<symbol> : <response json object}
+                       
+    get_alpaca_bars : Create the Alpaca API object & Get tickers data by using alpca sdk method get_bars
+                      params: tickers - list of string that represents tickers symbols
+                              timeframe - represents duration for which data is required e.g. "1Day"
+                              startdate - string type, represents start date
+                              enddate - string type, represents end date        
+                      return : DataFrame containing ticker historical data fetched from alpaca api
+    """
+    def __init__(self, envpath: Path = None):     
         if(envpath == None):
             load_dotenv()
         else:
@@ -23,11 +39,11 @@ class APIcalls:
         
         
     
-    def get_cryptos_price(self, urls:{}) -> {}:
+    def get_data_request(self, urls:{}) -> {}:
         """
-        get_cryptos_price fetches Crypto data e.g. prices, volume using request library
-        urls : dictionary of {<Crypto symbol> : <url to make request call>}
-        returns: dictionary of {<Crypto symbol> : <response json object}
+        get_cryptos_price : fetches data e.g. prices, volume using request library
+                            params: urls - dictionary of { <symbol> : <url to make request call>}
+                            returns: dictionary of {<symbol> : <response json object}
         """
         responsedic = {}
         for url in urls:            
@@ -37,9 +53,9 @@ class APIcalls:
         return responsedic
     
     
-    def get_alpca_bars(self,tickers: [],timeframe: str,startdate:str = None,enddate: str = None) -> DataFrame:
+    def get_alpaca_bars(self,tickers: [],timeframe: str,startdate:str = None,enddate: str = None) -> DataFrame:
         """
-        get_alpca_bars Create the Alpaca API object & Get tickers data by using alpca sdk method get_bars
+        get_alpaca_bars Create the Alpaca API object & Get tickers data by using alpca sdk method get_bars
         
         tickers : list of string that represents tickers symbols
         timeframe : represents duration for which data is required e.g. "1Day"
