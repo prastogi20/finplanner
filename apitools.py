@@ -16,7 +16,7 @@ class APIcalls:
     
     Functions    
     ----------
-    get_cryptos_price :fetches data e.g. prices, volume using request library
+    get_data_request :fetches data e.g. prices, volume using request library
                        params : urls - dictionary of { <symbol> : <url to make request call>}
                        returns: dictionary of {<symbol> : <response json object}
                        
@@ -41,7 +41,7 @@ class APIcalls:
     
     def get_data_request(self, urls:{}) -> {}:
         """
-        get_cryptos_price : fetches data e.g. prices, volume using request library
+        get_data_request : fetches data e.g. prices, volume using request library
                             params: urls - dictionary of { <symbol> : <url to make request call>}
                             returns: dictionary of {<symbol> : <response json object}
         """
